@@ -3,6 +3,7 @@ package com.spit.team_25.cswallet.models;
 public class User {
 
     private String name, email, balance, phone;
+    private Transactions transactions= new Transactions();
 
     public String getName() {
         return name;
@@ -35,4 +36,8 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Transactions getTransactions(){return transactions;}
+
+    public void setTransactions(){this.transactions = transactions;}
 }

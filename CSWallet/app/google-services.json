@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "352655024868-21fof8igkus2o80jhsl6coeab6pj3q50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spit.team_25.cswallet",
+            "certificate_hash": "678412fc6bcf98c81d9aa45f79551ea50be0e81f"
+          }
+        },
+        {
           "client_id": "352655024868-clv6nmnsihdiqb569d803nd7fvdtojr3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
