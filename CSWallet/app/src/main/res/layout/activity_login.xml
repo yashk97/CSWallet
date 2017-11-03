@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            tools:context="com.spit.team_25.cswallet.activities.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/login_img_padding"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/medium_text">
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_password"
+                android:imeActionId="@+id/login"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/wrong_cred"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/activity_vertical_margin"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_vertical_margin"/>
+
+        <Button
+            android:id="@+id/email_sign_in_button"
+            style="?android:textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/medium_text"
+            android:text="@string/action_sign_in"
+            android:textStyle="bold"
+            android:background="@drawable/button_shadow"/>
+
+        <TextView
+            android:id="@+id/signup_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/signup_link"
+            android:textColor="@color/colorPrimary"
+            android:soundEffectsEnabled="true"/>
+
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="@string/forgot_password_msg"
+            android:textColor="@color/colorPrimary"
+            android:soundEffectsEnabled="true"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/overflow_height"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/min_padding">
+
+            <View
+                android:layout_width="@dimen/null_size"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/min_padding"
+                android:paddingRight="@dimen/min_padding"
+                android:text="@string/social_sign_in"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/medium_text"/>
+
+            <View
+                android:layout_width="@dimen/null_size"
+                android:layout_height="2dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@android:color/darker_gray"/>
+        </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlGoogleSignIn"
+                android:layout_width="@dimen/app_bar_height"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/layout_shadow">
+
+                <ImageView
+                    android:id="@+id/ivGoogleSignIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_google"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/ivGoogleSignIn"
+                    android:text="@string/google_name"
+                    android:textColor="@android:color/black"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+</ScrollView>

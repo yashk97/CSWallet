@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "352655024868",
+    "firebase_url": "https://cswallet-9d190.firebaseio.com",
+    "project_id": "cswallet-9d190",
+    "storage_bucket": "cswallet-9d190.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352655024868:android:24b35aac044c9bf5",
+        "android_client_info": {
+          "package_name": "com.spit.team_25.cswallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352655024868-clv6nmnsihdiqb569d803nd7fvdtojr3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.spit.team_25.cswallet",
+            "certificate_hash": "32b78507977e70632efc05fc66e62620e3b61293"
+          }
+        },
+        {
+          "client_id": "352655024868-gagnug680dccpm4e1qffstcc7k3firp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj8ErUzTisjqGoOEmriGv7-qkBjIFVAhg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352655024868-gagnug680dccpm4e1qffstcc7k3firp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
