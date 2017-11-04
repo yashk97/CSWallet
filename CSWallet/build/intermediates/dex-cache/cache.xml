@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/62bac147110ca859945f0a1fcced9891879339a2/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_f46f76131ca50cf8484bdec6327e3f1097864f6d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/5fabbe913fb0d6fb14fd418462908c048880cf88/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_ad5d27786675142d56fa81fcd2f0335705d23bb1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/21a7f6b7704bd38be05df7c3060a30bff1a704f7/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_8db31e3338c32e9bc07ec30e69f2df96fe3f5597.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/c97f35c496b3b0defdf66da8da172a6eb86aa8b0/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_e1905d4704c7df9ba8a8c6dae3a61c9f9998ef5e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/85b476b7b8e1ef2e1e959f7e71de6d7ff409d26c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_6889fe041d22a3730e329c2c2ce2df7dc875bce6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/c53091cdf1ace1512f91e659f36d150089013915/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_62f60fdee47b2bfd15d2625c7525b56204090ce1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/9603143a3bf1b852b4124267bb2d1b3366242f04/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_319d4d43989434bfaa06ce9b5705d37a54397fb5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/support-annotations-25.3.1_2111dbf7a38bcc5cab2b06b32a4e27747c3ab02e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/7e263dd1204952e598e61f664fc020eea5bc232e/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_36e9dbde50e8b49419f222ecbea3b8726316ddb8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/acfa189b0bea6756110067a136f8ac5879451f55/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_253442cdd34e30ab541328f47d66fc743dc7d479.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/85704cf461cb908601086319fe57ff4ac5075a54/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="3ac08c35419ab7cf9146969de471768dbe502f0f">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_e10dbd98fbc4a9b85f890ca48a47528e93f7fa69.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/ab970abd33eccc9155521a300a1c77c7bf99609b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_c1644bbadda49ef62bf269e9cc6c316d66b4e412.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/da5c6254fd2a68546c52400498e13c54ce005509/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7c24e2e9773fb498e390ce973db382c3ddcf748e">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_d36a9eae8148ae8866574aa330f6a58c7dc4efe4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/de670439c0e56f0607857cfa3748719c47ac60f7/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_af177ceee012d933b2d8bd1c30a33dea7fdb6b14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/4bfcf15d56072c3029b7eb1b6b2884419650417d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_072edf01557c36c182ae7a6655891df5a5944dbd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/7b633e234af9171fd98c78f8f0672d9b84cab917/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_7774de7a03fc387ad0933f1ae8d273f51bec001b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/f5d9bf43438054b865f4ca913fd500758d843953/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="4b685077cdb08cf7ae8b61afd1fe910e47d91b9a">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_61c4ecb83cf4534c2af99cc2aa1f0049c1b5215a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/70d588339ab39ec7cbc7b767862f9695df9f571c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="b5b6af36bacf1d812cd3dc45f9dcab9ea471ed91">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_d080c377e4ef27a047eb0e3007ed9588b5b3a886.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/38b8440bd72af68ad9419c5583bc95ffe16ce1eb/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_363fda8053e75d42c48695e168d07f6ae1e7fe2f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/ccc866b7ac5958ac3ae409ee36b2d8015f48a61b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_3bcfd8b77419454b768ea23d4468bae5140b52ef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/613d79d40be998dfa9a84494217573b064d0a895/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="1b12397bc9f342b29d9e9108978828f99a6da579">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_1cd418b7757d25cc6061ea62a5d0ec22cdeb86fb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/7d156bbc2208df104ce76434447d347b0f6c703d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_75e15c0190e656f5bbf09f33beaaaa204862fca9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/39d70a54d79bcab63e76a0268298eca4410d975d/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_52575479ac275e17fbd9d929f00bb2264a88db4c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/13682b616f4092e7a47272e9722a573b2a27a427/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_01da3236b5ae5900351fabaf1752cb15f5915691.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/d3f10f41fbec1b929d3bb062deb596ddf0608955/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_ce1b0bd656954a1e02f820b810263fc2d883cd3b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/ccf7fddc5c0d1c6ea211fd11545e2a1c960b5c27/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_caf4dc7ac21e5840dc8593c2550f59efe1e41839.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/1c1ae6fe3c116eeccd29fd3489ab00ad349197f6/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e5b429c146094a612134910688d169ec08deeefb">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_cb3fe276b8393b93af17fddf6b63de06381325b3.jar" />
+    </item>
+
+</items>
