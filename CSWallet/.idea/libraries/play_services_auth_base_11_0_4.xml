@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="play-services-auth-base-11.0.4">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/62bac147110ca859945f0a1fcced9891879339a2/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/62bac147110ca859945f0a1fcced9891879339a2/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/5cdbe5111a7ee009699dc77924b60542578548f6/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/5cdbe5111a7ee009699dc77924b60542578548f6/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
