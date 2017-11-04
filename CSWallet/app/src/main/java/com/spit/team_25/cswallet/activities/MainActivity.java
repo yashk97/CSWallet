@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,11 @@ import com.spit.team_25.cswallet.models.User;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ai.api.android.AIConfiguration;
+import ai.api.android.AIDataService;
+import ai.api.model.AIRequest;
+import ai.api.model.AIResponse;
+
 import static android.widget.Toast.makeText;
 
 interface CallbackUserDetail {
@@ -58,13 +64,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private boolean doubleBackToExitPressedOnce = false;
     private FirebaseAuth mAuth;
     private User user;
+    private String ACCESS_TOKEN = "552c5f6b810d4aeb89880beead79ac11";
+    private android.content.Context context;
+    final AIConfiguration config = new AIConfiguration(ACCESS_TOKEN,
+            AIConfiguration.SupportedLanguages.English,
+            AIConfiguration.RecognitionEngine.System);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle(R.string.chat_bot);
-
         loadUserData(this);
 
         ImageButton sendButton = (ImageButton) findViewById(R.id.sendButton);
@@ -89,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 if (!messString.equals(BuildConfig.FLAVOR)) {
                     this.messages.add(new Message(BuildConfig.FLAVOR, messString, true, new Date()));
                     this.mAdapter.notifyDataSetChanged();
-                    sendMessage();
+                    sendMessage(messString);
                     this.messageText.setText(BuildConfig.FLAVOR);
                     return;
                 }
@@ -99,14 +111,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         }
     }
 
-    public void sendMessage() {
-        String[] incoming = new String[]{getBalance(), "Hey, How's it going?", "Super! Let's do lunch tomorrow", "How about Mexican?", "Great, I found this new place around the corner", "Ok, see you at 12 then!", getBalance()};
-        if (this.in_index < incoming.length) {
-            this.messages.add(new Message("John", incoming[this.in_index], false, new Date()));
-            this.in_index++;
+    public void sendMessage(String messString) {
+//        String[] incoming = new String[]{getBalance(), "Hey, How's it going?", "Super! Let's do lunch tomorrow", "How about Mexican?", "Great, I found this new place around the corner", "Ok, see you at 12 then!", getBalance()};
+//        if (this.in_index < incoming.length) {
+//            this.messages.add(new Message("John", incoming[this.in_index], false, new Date()));
+//            this.in_index++;
+//        }
+//        this.messageList.scrollToPosition(this.messages.size() - 1);
+//        this.mAdapter.notifyDataSetChanged();
+
+//        https://github.com/dialogflow/dialogflow-android-client
+        AIDataService aiDataService = new AIDataService(getApplicationContext(), config);
+       AIRequest aiRequest = new AIRequest();
+        aiRequest.setQuery(messString);
+        AIResponse response= new AIResponse();
+        try {
+
+            response = aiDataService.request(aiRequest);
+        }catch(Exception e){
+//        {   Log.e("status","dint work");
+            Log.e("error",e.toString());
         }
-        this.messageList.scrollToPosition(this.messages.size() - 1);
-        this.mAdapter.notifyDataSetChanged();
+        finally {
+            processResponse(response);
+        }
+
+    }
+
+    public void processResponse(AIResponse response){
+        final ai.api.model.Status status = response.getStatus();
+        Log.e("Status",status.getErrorType());
     }
 
     @Override
