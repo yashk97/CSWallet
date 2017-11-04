@@ -279,12 +279,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void createGoogleUser(GoogleSignInAccount account) {
+    private void createGoogleUser(GoogleSignInAccount account, String phone) {
         User newUser = new User();
         newUser.setName(account.getDisplayName());
         newUser.setEmail(account.getEmail());
         newUser.setBalance("0");
+        newUser.setPhone(phone);
         mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+        Intent intent = new Intent(getApplication(), MainActivity.class);
+        intent.putExtra("Login", "Google");
+        startActivity(intent);
+        setLoginStatus(getApplicationContext(), "Google");
+        finishPrevActivities();
     }
 
     // [START auth_with_google]
@@ -302,13 +308,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // Sign in success, update UI with the signed-in user's information
                             makeText(LoginActivity.this, "Signed In Successfully.",
                                     Toast.LENGTH_SHORT).show();
-                            createGoogleUser(acct);
+                            createGoogleUser(acct, getPhoneNo());
                             dialog.dismiss();
-                            Intent intent = new Intent(getApplication(), MainActivity.class);
-                            intent.putExtra("Login", "Google");
-                            startActivity(intent);
-                            setLoginStatus(getApplicationContext(), "Google");
-                            finishPrevActivities();
                         } else {
                             // If sign in fails, display a message to the user.
                             wrongCred.setText(task.getException().getLocalizedMessage());
@@ -318,6 +319,49 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                     }
                 });
+    }
+
+    private String getPhoneNo() {
+        final String[] phone = {""};
+
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.phone_number, null);
+        final EditText etPhone = (EditText) alertLayout.findViewById(R.id.etPhoneNumber);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Reset Password");
+        alert.setMessage("Enter your registered email used for account creation to reset password");
+        alert.setView(alertLayout);
+        //disallow cancel of AlertDialog on click of back button and outside touch
+        //alert.setCancelable(false);
+        alert.setNegativeButton("Cancel", null).setPositiveButton("Send Email", null);
+
+        AlertDialog dialog = alert.create();
+        dialog.setOnShowListener(new OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                Button positiveButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                positiveButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(etPhone.getText().toString().equals(""))
+                            etPhone.setError("This field is required");
+                        else if(!Patterns.PHONE.matcher(etPhone.getText().toString()).matches())
+                            etPhone.setError("Enter mobile number correctly");
+                        else {
+                            phone[0] = etPhone.getText().toString();
+                            dialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        return phone[0];
     }
     // [END auth_with_google]
 
