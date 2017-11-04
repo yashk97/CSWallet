@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -43,10 +44,12 @@ import com.spit.team_25.cswallet.models.User;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ai.api.AIServiceException;
 import ai.api.android.AIConfiguration;
 import ai.api.android.AIDataService;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
+import ai.api.model.Result;
 
 import static android.widget.Toast.makeText;
 
@@ -66,11 +69,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private User user;
     private String ACCESS_TOKEN = "552c5f6b810d4aeb89880beead79ac11";
     private android.content.Context context;
+    private AIDataService aiDataService;
+    private AIRequest aiRequest;
     final AIConfiguration config = new AIConfiguration(ACCESS_TOKEN,
             AIConfiguration.SupportedLanguages.English,
             AIConfiguration.RecognitionEngine.System);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,21 +124,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 //        this.mAdapter.notifyDataSetChanged();
 
 //        https://github.com/dialogflow/dialogflow-android-client
-        AIDataService aiDataService = new AIDataService(getApplicationContext(), config);
-       AIRequest aiRequest = new AIRequest();
+        aiDataService = new AIDataService(getApplicationContext(), config);
+        aiRequest = new AIRequest();
         aiRequest.setQuery(messString);
         AIResponse response= new AIResponse();
-        try {
-
-            response = aiDataService.request(aiRequest);
-        }catch(Exception e){
-//        {   Log.e("status","dint work");
-            Log.e("error",e.toString());
-        }
-        finally {
-            processResponse(response);
-        }
-
+        new TextProcessor().execute(aiRequest);
+//        try {
+//            new TextProcessor().execute(aiRequest);
+//        }catch(Exception e){
+////        {   Log.e("status","dint work");
+//            Log.e("error",e.toString());
+//        }
+//        finally {
+//            processResponse(response);
+//        }
     }
 
     public void processResponse(AIResponse response){
@@ -258,5 +260,27 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     private String getBalance() {
         return user.getBalance();
+    }
+
+
+    private class TextProcessor extends AsyncTask<AIRequest, Void, AIResponse> {
+
+        @Override
+        protected AIResponse doInBackground(AIRequest... requests) {
+            final AIRequest request = requests[0];
+            try {
+                return aiDataService.request(aiRequest);
+            }catch (AIServiceException e) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(AIResponse aiResponse) {
+            if (aiResponse != null) {
+                //process aiResponse here
+                final Result result = aiResponse.getResult();
+            }
+        }
     }
 }

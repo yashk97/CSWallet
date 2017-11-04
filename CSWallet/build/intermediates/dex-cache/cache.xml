@@ -2,292 +2,40 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/0900f5faa4fb2bc490ec64f155543d5b78d2a969/output/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/ae2066c14217acc4f1db2e4baebc540aa0b3e060/output/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_5652245f20499ff61edb046f35c98a480fb12367/classes.dex" />
+        sha1="606ef0d18ef792bcf35cc520fb4a1a25ea24c0e7">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_f0045399cacf48e573a38cb92b75c13757b18b88.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/a1b56826e61d232272f502112ac11973eb5d642d/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="1b12397bc9f342b29d9e9108978828f99a6da579">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_94cc4b513c9be97750fcef048392ddf363dec0d9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.gradle/caches/modules-2/files-2.1/ai.api/libai/1.6.12/53a80cbffa8e20d3a43b5e494bdecb396672d631/libai-1.6.12.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/rahul/.gradle/caches/modules-2/files-2.1/ai.api/libai/1.6.12/53a80cbffa8e20d3a43b5e494bdecb396672d631/libai-1.6.12.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
         sha1="53a80cbffa8e20d3a43b5e494bdecb396672d631">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/libai-1.6.12_8ac2cebe369ff1aa9bb79bd9287503fc5545d660/classes.dex" />
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/libai-1.6.12_cac0e5d84fc716d8573b7a040e09a8532e7beb62.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/49f8f9786157f09a8ca4624b4ecf5a3bb4922d4a/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_735f1b8755c9f747fd11b04c6adbda8c0f86cf26/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/fa04e0a0251e1bd47d3a4115b7edac7d4633173a/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="95519720620b553f63afc789beba9ad582807f7c">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ca30d43e69fce9230bc3721d7089252d217c4157/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/52081a048afecfaa32016f30154f401b241300ac/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="7c24e2e9773fb498e390ce973db382c3ddcf748e">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b0cd8db4afea0629cc558492e4bbf37862c71e72/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/b5a3064d622ab88257882f7d26264640b5987f0b/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d73b2353c93a5e8e9ee9f55a40d378a6b02fa89c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/3cff4b0142ece51cccacba4608eb04632804cf42/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6cda838de531b54a485370f1fd7985b0b02b3f52/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/c156a1fc061a69fad27352024b605470dfaaf3f7/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_afc36c861b4fb7c970893c2f334e9337893dea0b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/a5db825096049de7353b43bfa2f6cc1cfa04a682/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="4b685077cdb08cf7ae8b61afd1fe910e47d91b9a">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_067933ac042cd762d8072fc62b5ec17f9a7927ce/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/025d6a805a3ef360dc667458b867c60037d4d2c9/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7749cc20243d0f9b4f83c0e78a834bf86a91992a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/8498bde6cac7da17f4ef907d4b52b6a25714d5b6/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_55033c512aa1ad563a6469a4ffb0ba6d3ea26327/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/4d2190dd002a7c165309e7ef2d71e58b1d2dc2d1/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3e06b4eb6a09bb18676cdc910ed24c7d20ba2fe6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/0ef6c980cc6c77517c83ec36fe7deeb73c66b1e4/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e7c347ca8b3795ca915f7b3208b6d40f74f984b9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/77f61fc658f570a0b96a691ce2fdf165ffb57ff9/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c0a812efee0ac5689e9b9927f336444b8ebd0d61/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="da76ca59f6a57ee3102f8f9bd9cee742973efa8a">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/slf4j-api-1.7.25_331f05cd11d04724e2cebc00d3e289d4b98c04fb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/rahul/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
         sha1="02a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.1_1e1602498b3ef0aa1304da3798e14ac0b0e71d37/classes.dex" />
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/gson-2.8.1_70f5b967030c2377827210622f87c063bbc54360.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/ab352bebeba9148c8f9490bbd6635f9f6a0181b3/output/jars/classes.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/home/rahul/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar"
+        jumboMode="false"
         optimize="true"
         revision="26.0.1"
-        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b9b630b79384c90cd32fe25f2c8bb1e87d2ed2b7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/d461f672c4169163eb698046df7db488432bb459/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="e5b429c146094a612134910688d169ec08deeefb">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3c118108d1353b536b0978b9388ac12b580bc8db/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="c5ed643668475fb712bde71f96b558f28ce765cc">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_63e8301da2d7ddcedeb0133fabdecc84275f7eef/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/31d53f85decdee419ab93e38727df8a4223c2527/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="b5b6af36bacf1d812cd3dc45f9dcab9ea471ed91">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_54cd733db7aa93c7d0f0d26ff5cc3c0e74057e7a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_39c8823944ad425d008a485994a5ee573068b134/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/ff39be8a3728f10929e66ebffed65092cc887a1b/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a2e084fb3aecef051607ee79b2da549c92b14feb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/09b622d21ded2b0a405ba95c1bd9081719d52257/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="3ac08c35419ab7cf9146969de471768dbe502f0f">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e4f32449a4f3f2945354171d431755b6851ef8b9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/d91696217d9ef9f92d67292ee924697f1e2ae5da/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1d247337862d4a0fe8acf905e19d143c1387223c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/fc625a5d323b2303fcf1225bc2182a872f7aeca7/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1b2f494f374f933cb720beeb7874e0c16fa57654/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/9584549da1ae6c9396321b4c57910749bd35e917/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_dd56b8cffdb0fbd94b7083eab7cd5824e40ffdf1/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/322059ff9de6e113e1bc9122ea7dc47507e6468c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_48b0722cb51ece9c436ff3cab42d7db304a8c749/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/26b876c9f58ef305fb18a6ba88a0d5e0ef875c5d/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_df76c1cd3243885f7cee05370cf3ec596a2ed0d0/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/c075ada647073a5c1c2c5d9cdae60e0126dca4d9/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cda214b77bb120af462e7ec42a4a8fd167973256/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_8d6fe240607b18f16241a16f4feea684e16731ed/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/yash/.android/build-cache/5cdbe5111a7ee009699dc77924b60542578548f6/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="26.0.1"
-        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
-        <dex dex="/home/yash/Desktop/CS_Hackathon/CSWallet/CSWallet/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b7ec49650a068894699d81850e6bb29212d3a488/classes.dex" />
+        sha1="da76ca59f6a57ee3102f8f9bd9cee742973efa8a">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/slf4j-api-1.7.25_bfc52cd6b1d6111bc3c230c3fa273eb8893abd12.jar" />
     </item>
 
 </items>
