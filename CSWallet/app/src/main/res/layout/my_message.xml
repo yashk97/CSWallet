@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+        android:orientation="vertical"
+        android:background="@drawable/bg_message_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20pt"
+        android:layout_marginTop="2pt"
+        android:layout_marginRight="2pt"
+        android:layout_marginBottom="2pt"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:textSize="10pt"
+            android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+            android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:id="@+id/mymessageTextView"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2pt"
+            android:layout_marginTop="2pt"
+            android:layout_marginRight="2pt"
+            android:text="message" android:editable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="false"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="8sp"
+            android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:id="@+id/mytimeTextView"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2pt"
+            android:layout_marginRight="2pt"
+            android:layout_marginBottom="2pt"
+            android:text="Time"
+            android:layout_below="@+id/mymessageTextView"
+            android:layout_alignParentBottom="true" />
+    </LinearLayout>
+</RelativeLayout>
