@@ -26,4 +26,5 @@
     <string name="google_name">Google</string>
     <string name="social_sign_in">OR Sign In With</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="messagehint">Type your message here</string>
 </resources>
