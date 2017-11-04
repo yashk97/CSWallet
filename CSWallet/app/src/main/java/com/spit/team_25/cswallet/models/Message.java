@@ -1,18 +1,18 @@
-package hk.ust.cse.comp107x.chatclient;
+package com.spit.team_25.cswallet.models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Message {
     private Date date;
-    private boolean fromMe;
+    private boolean fromBot;
     private String fromName;
     private String message;
 
-    public Message(String fromName, String message, boolean fromMe, Date date) {
+    public Message(String fromName, String message, boolean fromBot, Date date) {
         this.fromName = fromName;
         this.message = message;
-        this.fromMe = fromMe;
+        this.fromBot = fromBot;
         this.date = date;
     }
 
@@ -32,12 +32,12 @@ public class Message {
         this.message = message;
     }
 
-    public boolean fromMe() {
-        return this.fromMe;
+    public boolean fromBot() {
+        return this.fromBot;
     }
 
-    public void setSelf(boolean fromMe) {
-        this.fromMe = fromMe;
+    public void setSelf(boolean fromBot) {
+        this.fromBot = fromBot;
     }
 
     public void setDate(Date date) {

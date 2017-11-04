@@ -96,7 +96,7 @@ public class SignUpActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
-                    // If sign in fails, display a message to the user.
+                    // If sign in fails, display a bot_message to the user.
                     dialog.dismiss();
                     //Toast.makeText(SignUpActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     etError.setVisibility(View.VISIBLE);

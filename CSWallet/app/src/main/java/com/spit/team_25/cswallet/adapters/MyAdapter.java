@@ -1,4 +1,4 @@
-package hk.ust.cse.comp107x.chatclient;
+package com.spit.team_25.cswallet.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -7,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.spit.team_25.cswallet.R;
+import com.spit.team_25.cswallet.models.Message;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends Adapter<ViewHolder> {
@@ -45,9 +49,9 @@ public class MyAdapter extends Adapter<ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_HOLDER_TYPE_1 /*1*/:
-                return new ViewHolder_Type1(LayoutInflater.from(parent.getContext()).inflate(R.layout.mymessage, parent, false));
+                return new ViewHolder_Type1(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_message, parent, false));
             case VIEW_HOLDER_TYPE_2 /*2*/:
-                return new ViewHolder_Type2(LayoutInflater.from(parent.getContext()).inflate(R.layout.message, parent, false));
+                return new ViewHolder_Type2(LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_message, parent, false));
             default:
                 return null;
         }
@@ -71,7 +75,7 @@ public class MyAdapter extends Adapter<ViewHolder> {
     }
 
     public int getItemViewType(int position) {
-        if (((Message) this.messages.get(position)).fromMe()) {
+        if (((Message) this.messages.get(position)).fromBot()) {
             return VIEW_HOLDER_TYPE_1;
         }
         return VIEW_HOLDER_TYPE_2;

@@ -1,38 +1,79 @@
 package com.spit.team_25.cswallet.activities;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-import com.spit.team_25.cswallet.BuildConfig;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.spit.team_25.cswallet.R;
+import com.spit.team_25.cswallet.adapters.BuildConfig;
+import com.spit.team_25.cswallet.adapters.MyAdapter;
+import com.spit.team_25.cswallet.models.GoogleSessionManager;
+import com.spit.team_25.cswallet.models.Message;
+import com.spit.team_25.cswallet.models.User;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
-    int in_index = 0;
-    Adapter mAdapter = null;
-    RecyclerView messageList;
-    EditText messageText;
-    ArrayList<Message> messages = null;
-    ImageButton sendButton;
+import static android.widget.Toast.makeText;
 
+interface CallbackUserDetail {
+    void onComplete(User user);
+}
+
+public class MainActivity extends AppCompatActivity implements OnClickListener, CallbackUserDetail {
+
+    private int in_index = 0;
+    private Adapter mAdapter = null;
+    private RecyclerView messageList;
+    private EditText messageText;
+    private ArrayList messages = null;
+    private boolean doubleBackToExitPressedOnce = false;
+    private FirebaseAuth mAuth;
+    private User user;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.sendButton = (ImageButton) findViewById(R.id.sendButton);
-        this.sendButton.setOnClickListener(this);
+        getSupportActionBar().setTitle(R.string.chat_bot);
+
+        loadUserData(this);
+
+        ImageButton sendButton = (ImageButton) findViewById(R.id.sendButton);
+        sendButton.setOnClickListener(this);
         this.messageText = (EditText) findViewById(R.id.messageText);
-        this.messages = new ArrayList<>();
+        this.messages = new ArrayList();
         this.mAdapter = new MyAdapter(this, this.messages);
-//        getSupportActionBar().setTitle(getResources().getString(R.string.app_name);
+
+
         this.messageList = (RecyclerView) findViewById(R.id.messageList);
         this.messageList.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -59,12 +100,129 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void sendMessage() {
-        String[] incoming = new String[]{"Hey, How's it going?", "Super! Let's do lunch tomorrow", "How about Mexican?", "Great, I found this new place around the corner", "Ok, see you at 12 then!"};
+        String[] incoming = new String[]{getBalance(), "Hey, How's it going?", "Super! Let's do lunch tomorrow", "How about Mexican?", "Great, I found this new place around the corner", "Ok, see you at 12 then!", getBalance()};
         if (this.in_index < incoming.length) {
             this.messages.add(new Message("John", incoming[this.in_index], false, new Date()));
             this.in_index++;
         }
         this.messageList.scrollToPosition(this.messages.size() - 1);
         this.mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            signOut();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            this.finish();
+        } else {
+            doubleBackToExitPressedOnce = true;
+            makeText(this, "Press Again To Exit", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
+    }
+
+    private void loadUserData(@NonNull final CallbackUserDetail callback)
+    {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
+
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                if(user != null)
+                    callback.onComplete(user);
+                else
+                    signOut();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+    }
+
+    @Override
+    public void onComplete(User user) {
+        this.user = user;
+    }
+
+    private void signOut() {
+
+        mAuth.signOut();
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if (sharedPreferences.getString("method", "").equals("Google")) {
+            final GoogleApiClient mGoogleApiClient = new GoogleSessionManager(getApplicationContext()).mGoogleApiClient;
+            mGoogleApiClient.connect();
+            mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                @Override
+                public void onConnected(@Nullable Bundle bundle) {
+                    if(mGoogleApiClient.isConnected())
+                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(@NonNull Status status) {
+                                if(status.isSuccess()) {
+                                    makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(intent);
+                                    setLoginStatus(getApplicationContext());
+                                    MainActivity.this.finish();
+                                }
+                            }
+                        });
+                }
+
+                @Override
+                public void onConnectionSuspended(int i) {
+                    makeText(getApplicationContext(), "Error! Please Try Again Later", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        setLoginStatus(this);
+        MainActivity.this.finish();
+    }
+
+    private void setLoginStatus(Context context) {
+        Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putString("status", "");
+        editor.putString("method", "");
+        editor.apply();
+    }
+
+    private String getBalance() {
+        return user.getBalance();
     }
 }

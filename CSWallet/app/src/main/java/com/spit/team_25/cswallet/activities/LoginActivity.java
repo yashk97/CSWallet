@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
                 }
                 else {
-                    // Toast displays the message on the screen for a period of time
+                    // Toast displays the bot_message on the screen for a period of time
                     makeText(getApplicationContext(), "You are Offline! Turn on your network!", Toast.LENGTH_LONG).show();
                 }
             }
@@ -311,7 +311,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             createGoogleUser(acct, getPhoneNo());
                             dialog.dismiss();
                         } else {
-                            // If sign in fails, display a message to the user.
+                            // If sign in fails, display a bot_message to the user.
                             wrongCred.setText(task.getException().getLocalizedMessage());
                             wrongCred.setError("");
                             dialog.dismiss();
