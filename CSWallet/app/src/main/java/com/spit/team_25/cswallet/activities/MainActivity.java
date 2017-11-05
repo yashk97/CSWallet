@@ -85,9 +85,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         getSupportActionBar().setTitle(R.string.chat_bot);
         loadUserData(this);
 
-        Intent intent = new Intent(this, TransactionActivity.class);
-        startActivity(intent);
-
         ImageButton sendButton = (ImageButton) findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
         this.messageText = (EditText) findViewById(R.id.messageText);
