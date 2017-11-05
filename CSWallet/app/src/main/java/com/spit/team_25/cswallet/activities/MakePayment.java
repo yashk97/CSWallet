@@ -1,11 +1,10 @@
 package com.spit.team_25.cswallet.activities;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,32 +16,45 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonElement;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.models.Transactions;
 import com.spit.team_25.cswallet.models.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import android.view.View.OnClickListener;
+
+import static android.widget.Toast.makeText;
 
 interface CallbackUserCred {
-    User onComplete(ArrayList<User> list, String number);
+    void onComplete(HashMap<String,User> list, String number, int Amount);
 }
 public class MakePayment extends AppCompatActivity implements OnClickListener, CallbackUserCred {
-    private FirebaseAuth mAuth;
-    private User user;
-    private Transactions transactions;
+//     mAuth;
+    User user;
+    Transactions transaction;
     EditText amt;
-    EditText phone;
-    final TextView textView = (TextView) findViewById(R.id.receiver_name);
 
+    EditText phone;
+    TextView textView;
+    DatabaseReference mDatabase;
+     FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_payment);
         Integer Amount = 0;
-        amt = (EditText) findViewById(R.id.amount);
-        phone = (EditText) findViewById(R.id.receiver_contact);
         Button payButton = (Button) findViewById(R.id.btn_pay);
         payButton.setOnClickListener(this);
+        amt = (EditText) findViewById(R.id.amount);
+        phone = (EditText) findViewById(R.id.receiver_contact);
+        textView = (TextView) findViewById(R.id.receiver_name);
+        mAuth= FirebaseAuth.getInstance();
+        user = (User) getIntent().getSerializableExtra("Currentuser");
 
         String[] params = getIntent().getStringArrayExtra("Extra");
         if (!params[0].equals("null")) {
@@ -63,51 +75,72 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
     }
 
     @Override
-    public User onComplete(ArrayList<User> list, String number) {
-        for(User u : list){
-            if(number.equals(u.getPhone())){
-
+    public void onComplete(HashMap<String,User> list, String number, int Amount) {
+        for(final Map.Entry<String, User> u : list.entrySet()){
+            if(number.equals(u.getValue().getPhone())){
+                //Sender  TID, Status, Transaction_with, Amount, Timestamp
+                int temp = Integer.valueOf(user.getBalance()) - Amount;
+                user.setBalance(Integer.toString(temp));
+                Random r = new Random();
+                String TID = Integer.toString(r.nextInt( Integer.MAX_VALUE ) + 1);
+                transaction = new Transactions(TID, "Paid", u.getValue().getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
+                mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("balance").setValue(user.getBalance());
+                mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("transaction").child(transaction.getTID()).setValue(transaction);
+//                mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
+                //Receiver
+                temp = Integer.valueOf(u.getValue().getBalance()) + Amount;
+                u.getValue().setBalance(Integer.toString(temp));
+                mDatabase.child("users").child(u.getKey()).child("balance").setValue(u.getValue().getBalance());
+              transaction = new Transactions(TID, "Received", user.getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
+                mDatabase.child("users").child(u.getKey()).child("transaction").child(transaction.getTID()).setValue(transaction);
+                return;
+//                break;
             }
         }
-        return null;
+        TextView error = (TextView) findViewById(R.id.payment_error);
+        error.setText("invalid no.");
     }
 
-    public void validateCredentials(String name, final String number, @NonNull final CallbackUserCred callback){
-        DatabaseReference mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        Query query = mFirebaseDatabaseReference.child("users").orderByChild("name").equalTo(name);
-        query.addValueEventListener(new ValueEventListener()
+    public void validateCredentials(String name, final String number, final int Amount, @NonNull final CallbackUserCred callback){
+        mDatabase= FirebaseDatabase.getInstance().getReference();
+        Query query = mDatabase.child("users").orderByChild("name").equalTo(name);
+        query.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                ArrayList<User> list = new ArrayList<>();
-                for(DataSnapshot usr : dataSnapshot.getChildren()){
-                    list.add(usr.getValue(User.class));
+                HashMap<String,User> list = new HashMap<String, User>();
+                for(DataSnapshot usr : dataSnapshot.getChildren()) {
+                    list.put(usr.getKey(), usr.getValue(User.class));
+                    Log.e("for loop", usr.getKey()+" "+usr.getValue(User.class).getName());
                 }
-                callback.onComplete(list,number);
+
+                callback.onComplete(list, number, Amount);
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError)
             {
-
+                TextView error = (TextView) findViewById(R.id.payment_error);
+                error.setText("Invalid Name");
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-
         String name = textView.getText().toString().split(" ")[2];
+        Log.e("receiver",name);
         String number = phone.getText().toString();
         int Amount = Integer.valueOf(amt.getText().toString());
 
         int user_balance = Integer.valueOf(user.getBalance());
-        if(Amount < user_balance){
+        if(Amount > user_balance){
             TextView error = (TextView) findViewById(R.id.payment_error);
             error.setText("InSufficient Balance");
         }
-
-        validateCredentials(name, number,this);
+        else
+            validateCredentials(name, number,Amount,this);
     }
 }

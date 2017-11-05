@@ -4,6 +4,14 @@ import java.io.Serializable;
 
 public class Transactions implements Serializable{
     private String TID, Status, Transaction_with, Amount, Timestamp;
+    public Transactions(String TID, String Status, String Transaction_with, String Amount, String TimeStamp){
+        this.TID = TID;
+        this.Status = Status;
+        this.Transaction_with = Transaction_with;
+        this.Amount = Amount;
+        this.Timestamp = TimeStamp;
+    }
+    public Transactions(){}
 
     public String getTID(){return TID;}
 

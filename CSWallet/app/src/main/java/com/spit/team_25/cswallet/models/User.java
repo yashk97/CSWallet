@@ -4,8 +4,17 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
-    private String name, email, balance, phone;
-    private Transactions transactions= new Transactions();
+    private String Uid, name, email, balance, phone;
+    private Transactions transactions;
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String Uid) {
+        this.Uid = Uid;
+    }
+
 
     public String getName() {
         return name;
