@@ -25,24 +25,25 @@ public class TransactionDetailActivity extends AppCompatActivity {
 
         TextView amt = (TextView) findViewById(R.id.tvAmtDetail);
         TextView status = (TextView) findViewById(R.id.tvStatusDetail);
+        TextView statusLabel = (TextView) findViewById(R.id.tvStatusLabel);
         TextView withVendor = (TextView) findViewById(R.id.tvWithDetail);
         TextView TID = (TextView) findViewById(R.id.tvTID);
         TextView date = (TextView) findViewById(R.id.tvTransactionDateDetail);
-        TextView time = (TextView) findViewById(R.id.tvTransactionTimeDetail);
-        ImageView transDetail = (ImageView) findViewById(R.id.ivTransationDetail);
+        ImageView transDetail = (ImageView) findViewById(R.id.ivTransactionDetail);
 
         amt.setText(transaction.getAmount());
         if(transaction.getStatus().equals("paid")){
             status.setText("Paid Successfully");
+            statusLabel.setText("To:");
             transDetail.setImageResource(R.drawable.ic_paid);
         }else{
             status.setText("Received Successfully");
+            statusLabel.setText("From:");
             transDetail.setImageResource(R.drawable.ic_receive);
         }
         withVendor.setText(transaction.getTransaction_with());
         TID.setText(transaction.getTID());
 
-        date.setText(DateFormat.getDateInstance().format(Long.parseLong(transaction.getTimestamp())));
-        time.setText(DateFormat.getTimeInstance().format(Long.parseLong(transaction.getTimestamp())));
+        date.setText(DateFormat.getDateTimeInstance().format(Long.parseLong(transaction.getTimestamp())));
     }
 }
