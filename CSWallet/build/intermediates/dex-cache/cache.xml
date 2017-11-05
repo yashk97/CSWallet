@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/rahul/.android/build-cache/d75f94321b0d62a76f6a42c47037e23d55836864/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_b4edb0586a51cdebfff0b75b4b43886003b0b519.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/rahul/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
         jumboMode="false"
         optimize="true"
@@ -30,12 +39,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="/home/rahul/.android/build-cache/10d366e5caad87da174582bf88e7f4dec30261e1/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="679c36376300693ca1e2c25e50602ce01b183965">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_b43cd5e4aec7f201a53fa7c19a7edd3eaa60b8e9.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/rahul/.gradle/caches/modules-2/files-2.1/org.slf4j/slf4j-api/1.7.25/da76ca59f6a57ee3102f8f9bd9cee742973efa8a/slf4j-api-1.7.25.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.1"
         sha1="da76ca59f6a57ee3102f8f9bd9cee742973efa8a">
         <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/slf4j-api-1.7.25_bfc52cd6b1d6111bc3c230c3fa273eb8893abd12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/rahul/.android/build-cache/4049ada112b48eed9a32b9f24ffa26b8f83b198f/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="1828dd75d357690efb2c5f4326804e2f7ad21f6c">
+        <dex dex="/home/rahul/AndroidStudioProjects/CSWallet/CSWallet/app/build/intermediates/pre-dexed/debug/classes_ce6bead732633e35c6f6db643488f2d059e34505.jar" />
     </item>
 
 </items>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/rlTransaction"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/min_padding"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="3dp">
+
+        <ImageView
+            android:id="@+id/ivMoneyDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_paid"
+            android:foregroundGravity="center"/>
+
+        <TextView
+            android:id="@+id/cardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/min_padding"
+            android:text="Card Title"
+            android:textColor="#000000"
+            android:textSize="12sp"
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:layout_toEndOf="@id/ivMoneyDirection"/>
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="10sp"
+            android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:id="@+id/tvTransactionDate"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2pt"
+            android:layout_marginRight="2pt"
+            android:layout_marginBottom="2pt"
+            android:text="Date"
+            android:layout_below="@+id/cardTitle"
+            android:layout_toEndOf="@id/ivMoneyDirection"/>
+
+        <TextView
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textSize="10sp"
+            android:layout_gravity="left|right|center_horizontal|fill_horizontal|center|fill|start|end"
+            android:id="@+id/tvTransactionTime"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2pt"
+            android:layout_marginRight="2pt"
+            android:layout_marginBottom="2pt"
+            android:text="Time"
+            android:layout_toEndOf="@id/tvTransactionDate"
+            android:layout_below="@id/cardTitle"/>
+
+        <ImageView
+            android:id="@+id/ivRupee"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_rupee"
+            android:layout_marginEnd="8dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/tvTransactionAmt"/>
+
+        <TextView
+            android:id="@+id/tvTransactionAmt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvTransactionTime"
+            android:background="@android:color/darker_gray"/>
+</RelativeLayout>

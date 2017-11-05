@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -286,6 +287,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         newUser.setBalance("0");
         newUser.setPhone(phone);
         mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+
+        makeText(LoginActivity.this, "Signed In Successfully.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplication(), MainActivity.class);
         intent.putExtra("Login", "Google");
         startActivity(intent);
@@ -306,9 +309,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            makeText(LoginActivity.this, "Signed In Successfully.",
-                                    Toast.LENGTH_SHORT).show();
-                            createGoogleUser(acct, getPhoneNo());
+                            getPhoneNo(acct);
                             dialog.dismiss();
                         } else {
                             // If sign in fails, display a bot_message to the user.
@@ -321,20 +322,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 });
     }
 
-    private String getPhoneNo() {
-        final String[] phone = {""};
+    private void getPhoneNo(final GoogleSignInAccount account) {
 
         LayoutInflater inflater = getLayoutInflater();
         View alertLayout = inflater.inflate(R.layout.phone_number, null);
         final EditText etPhone = (EditText) alertLayout.findViewById(R.id.etPhoneNumber);
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Reset Password");
-        alert.setMessage("Enter your registered email used for account creation to reset password");
+        alert.setTitle("Enter Contact");
+        alert.setMessage("Enter your phone number that you use most frequently");
         alert.setView(alertLayout);
         //disallow cancel of AlertDialog on click of back button and outside touch
         //alert.setCancelable(false);
-        alert.setNegativeButton("Cancel", null).setPositiveButton("Send Email", null);
+        alert.setNegativeButton("Cancel", null).setPositiveButton("OK", null);
 
         AlertDialog dialog = alert.create();
         dialog.setOnShowListener(new OnShowListener() {
@@ -344,13 +344,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 positiveButton.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(etPhone.getText().toString().equals(""))
-                            etPhone.setError("This field is required");
-                        else if(!Patterns.PHONE.matcher(etPhone.getText().toString()).matches())
-                            etPhone.setError("Enter mobile number correctly");
+                        if (TextUtils.isEmpty(etPhone.getText().toString())) {
+                            etPhone.setError("Required");
+                        } else if (!(etPhone.getText().toString().length() == 10)) {
+                            etPhone.setError("Invalid Number");
+                        }
                         else {
-                            phone[0] = etPhone.getText().toString();
+                            etPhone.setError(null);
                             dialog.dismiss();
+                            createGoogleUser(account, etPhone.getText().toString());
                         }
                     }
                 });
@@ -360,8 +362,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-
-        return phone[0];
     }
     // [END auth_with_google]
 

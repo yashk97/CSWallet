@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -52,6 +54,7 @@ import ai.api.model.AIResponse;
 import ai.api.model.Result;
 
 import static android.widget.Toast.makeText;
+import static com.spit.team_25.cswallet.R.id.sendButton;
 
 interface CallbackUserDetail {
     void onComplete(User user);
@@ -82,6 +85,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         getSupportActionBar().setTitle(R.string.chat_bot);
         loadUserData(this);
 
+        Intent intent = new Intent(this, TransactionActivity.class);
+        startActivity(intent);
+
         ImageButton sendButton = (ImageButton) findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
         this.messageText = (EditText) findViewById(R.id.messageText);
@@ -99,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.sendButton /*2131558507*/:
+            case sendButton /*2131558507*/:
                 String messString = this.messageText.getText().toString();
                 if (!messString.equals(BuildConfig.FLAVOR)) {
                     this.messages.add(new Message(BuildConfig.FLAVOR, messString, true, new Date()));
@@ -211,44 +217,48 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     }
 
     private void signOut() {
+        if(isOnline()) {
+            mAuth.signOut();
 
-        mAuth.signOut();
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
-        if (sharedPreferences.getString("method", "").equals("Google")) {
-            final GoogleApiClient mGoogleApiClient = new GoogleSessionManager(getApplicationContext()).mGoogleApiClient;
-            mGoogleApiClient.connect();
-            mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
-                @Override
-                public void onConnected(@Nullable Bundle bundle) {
-                    if(mGoogleApiClient.isConnected())
-                        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(@NonNull Status status) {
-                                if(status.isSuccess()) {
-                                    makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                    startActivity(intent);
-                                    setLoginStatus(getApplicationContext());
-                                    MainActivity.this.finish();
+            if (sharedPreferences.getString("method", "").equals("Google")) {
+                final GoogleApiClient mGoogleApiClient = new GoogleSessionManager(getApplicationContext()).mGoogleApiClient;
+                mGoogleApiClient.connect();
+                mGoogleApiClient.registerConnectionCallbacks(new GoogleApiClient.ConnectionCallbacks() {
+                    @Override
+                    public void onConnected(@Nullable Bundle bundle) {
+                        if (mGoogleApiClient.isConnected())
+                            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+                                @Override
+                                public void onResult(@NonNull Status status) {
+                                    if (status.isSuccess()) {
+                                        makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                        startActivity(intent);
+                                        setLoginStatus(getApplicationContext());
+                                        MainActivity.this.finish();
+                                    }
                                 }
-                            }
-                        });
-                }
+                            });
+                    }
 
-                @Override
-                public void onConnectionSuspended(int i) {
-                    makeText(getApplicationContext(), "Error! Please Try Again Later", Toast.LENGTH_LONG).show();
-                }
-            });
+                    @Override
+                    public void onConnectionSuspended(int i) {
+                        makeText(getApplicationContext(), "Error! Please Try Again Later", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            setLoginStatus(this);
+            MainActivity.this.finish();
         }
+        else
+            Toast.makeText(this, "You Are Offline", Toast.LENGTH_SHORT).show();
 
-        makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
-        setLoginStatus(this);
-        MainActivity.this.finish();
     }
 
     private void setLoginStatus(Context context) {
@@ -256,6 +266,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         editor.putString("status", "");
         editor.putString("method", "");
         editor.apply();
+    }
+
+    // This method checks to see if the device is online. Returns true if online, else false
+    private boolean isOnline() {
+        // Connectivity manager gives you access to the current state of the connection
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     private String getBalance() {

@@ -18,6 +18,8 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:inputType="phone"
+            android:maxLength="10"
+            android:digits="0123456789"
             android:hint="Enter Mobile Number..." />
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>
