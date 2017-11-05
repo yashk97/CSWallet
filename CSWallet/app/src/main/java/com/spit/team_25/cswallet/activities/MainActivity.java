@@ -475,6 +475,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                         }
                         break;
 
+                    case "getHist":
+                        getHistory();
+                        break;
+
                     default:
                         messages.add(new Message("WALLY", speech, false, new Date()));
                         insertInDatabase(speech, "bot");

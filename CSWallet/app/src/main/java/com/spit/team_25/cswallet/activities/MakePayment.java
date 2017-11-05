@@ -86,7 +86,7 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
                 user.setBalance(Integer.toString(temp));
                 Random r = new Random();
                 String TID = Integer.toString(r.nextInt( Integer.MAX_VALUE ) + 1);
-                transaction = new Transactions(TID, "Paid", u.getValue().getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
+                transaction = new Transactions(TID, "paid", u.getValue().getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
                 mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("balance").setValue(user.getBalance());
                 mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("transaction").child(transaction.getTID()).setValue(transaction);
 //                mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(user);
