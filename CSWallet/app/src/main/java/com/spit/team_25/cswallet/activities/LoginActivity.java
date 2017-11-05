@@ -38,8 +38,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.models.User;
 
@@ -280,13 +283,32 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void createGoogleUser(GoogleSignInAccount account, String phone) {
-        User newUser = new User();
+    private void createGoogleUser(final GoogleSignInAccount account, String phone) {
+        final User newUser = new User();
         newUser.setName(account.getDisplayName());
         newUser.setEmail(account.getEmail());
         newUser.setBalance("0");
         newUser.setPhone(phone);
-        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+
+        mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean flag = false;
+                for(DataSnapshot data:dataSnapshot.getChildren())
+                    if (data.child(mAuth.getCurrentUser().getUid()).exists()){
+                        flag = true;
+                        break;
+                    }
+
+                if(!flag)
+                    mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         makeText(LoginActivity.this, "Signed In Successfully.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getApplication(), MainActivity.class);
