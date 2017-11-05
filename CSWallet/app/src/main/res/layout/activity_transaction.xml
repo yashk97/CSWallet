@@ -89,7 +89,9 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <com.arlib.floatingsearchview.FloatingSearchView
+    <include layout="@layout/search_layout"></include>
+
+ <!--   <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/floating_search_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -102,5 +104,5 @@
         app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"
         app:floatingSearch_searchHint="Search..."
         app:floatingSearch_showSearchKey="true"
-        app:floatingSearch_suggestionsListAnimDuration="250"/>
+        app:floatingSearch_suggestionsListAnimDuration="250"/> -->
 </android.support.design.widget.CoordinatorLayout>

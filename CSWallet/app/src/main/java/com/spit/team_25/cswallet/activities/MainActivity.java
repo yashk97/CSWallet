@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -39,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonElement;
 import com.spit.team_25.cswallet.R;
@@ -48,6 +50,7 @@ import com.spit.team_25.cswallet.database.MeassgeReaderContract.MessageEntry;
 import com.spit.team_25.cswallet.database.MessageReaderDbHelper;
 import com.spit.team_25.cswallet.models.GoogleSessionManager;
 import com.spit.team_25.cswallet.models.Message;
+import com.spit.team_25.cswallet.models.Transactions;
 import com.spit.team_25.cswallet.models.User;
 
 import java.text.ParseException;
@@ -340,6 +343,33 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         values.put(MessageEntry.COLUMN_NAME_FROM, from);
 
         db.insert(MessageEntry.TABLE_NAME, null, values);
+    }
+
+    private void getHistory(){
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        Query query =mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("transaction");
+        query.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                ArrayList<Transactions> list= new ArrayList<>();
+                for(DataSnapshot usr : dataSnapshot.getChildren()) {
+                    list.add(usr.getValue(Transactions.class));
+                    Log.e("for loop", usr.getValue(Transactions.class).getTID());
+                }
+                Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+                intent.putExtra("transactions", list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+                TextView error = (TextView) findViewById(R.id.payment_error);
+                error.setText("Invalid Name");
+            }
+        });
     }
 
     @Override

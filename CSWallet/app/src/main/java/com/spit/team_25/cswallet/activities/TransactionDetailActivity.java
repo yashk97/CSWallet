@@ -56,6 +56,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MainActivity.class);
             getIntent().putExtra("payment", "done");
             startActivity(intent);
+            finishAffinity();
         }
     }
 }
