@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonElement;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.adapters.BuildConfig;
 import com.spit.team_25.cswallet.adapters.MyAdapter;
@@ -45,6 +46,8 @@ import com.spit.team_25.cswallet.models.User;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import ai.api.AIServiceException;
 import ai.api.android.AIConfiguration;
@@ -118,34 +121,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     }
 
     public void sendMessage(String messString) {
-//        String[] incoming = new String[]{getBalance(), "Hey, How's it going?", "Super! Let's do lunch tomorrow", "How about Mexican?", "Great, I found this new place around the corner", "Ok, see you at 12 then!", getBalance()};
-//        if (this.in_index < incoming.length) {
-//            this.messages.add(new Message("John", incoming[this.in_index], false, new Date()));
-//            this.in_index++;
-//        }
-//        this.messageList.scrollToPosition(this.messages.size() - 1);
-//        this.mAdapter.notifyDataSetChanged();
-
-//        https://github.com/dialogflow/dialogflow-android-client
         aiDataService = new AIDataService(getApplicationContext(), config);
         aiRequest = new AIRequest();
         aiRequest.setQuery(messString);
         AIResponse response= new AIResponse();
         new TextProcessor().execute(aiRequest);
-//        try {
-//            new TextProcessor().execute(aiRequest);
-//        }catch(Exception e){
-////        {   Log.e("status","dint work");
-//            Log.e("error",e.toString());
-//        }
-//        finally {
-//            processResponse(response);
-//        }
-    }
-
-    public void processResponse(AIResponse response){
-        final ai.api.model.Status status = response.getStatus();
-        Log.e("Status",status.getErrorType());
     }
 
     @Override
@@ -274,10 +254,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    private String getBalance() {
-        return user.getBalance();
+    private void getBalance() {
+        this.messages.add(new Message("Wally","Your wallet balance is Rs. "+user.getBalance(), false, new Date()));
+        this.messageList.scrollToPosition(this.messages.size() - 1);
+        this.mAdapter.notifyDataSetChanged();
     }
-
 
     private class TextProcessor extends AsyncTask<AIRequest, Void, AIResponse> {
 
@@ -296,6 +277,43 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
             if (aiResponse != null) {
                 //process aiResponse here
                 final Result result = aiResponse.getResult();
+                final String speech = result.getFulfillment().getSpeech();
+
+                Log.e("result",result.toString());
+                switch (result.getAction())
+                {
+                    case "getBalance":getBalance();Log.e("result", "Speech: " + speech);break;
+
+                    case "Pay":
+
+                        String []s = new String[2];
+                        Intent intent = new Intent(getApplicationContext(), MakePayment.class);
+                        final HashMap<String, JsonElement> params = result.getParameters();
+                        Log.e("para", params.toString());
+                        if (params != null && !params.isEmpty()) {
+                            Log.e("Pay", "Parameters: ");
+                            for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
+                                Log.e("Pay", String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
+                            }
+
+                        }
+                        if(params.get("number") != null)
+                            s[0] = params.get("number").getAsString();
+                        else s[0] = "null";
+
+                        if(params.get("given-name") != null)
+                            s[1] = params.get("given-name").getAsString();
+                        else s[1] = "null";
+
+                        intent.putExtra("Currentuser",user);
+                        intent.putExtra("Extra", s);
+                        startActivity(intent);
+                        break;
+
+                    default:messages.add(new Message("Wally",speech, false, new Date()));
+                        messageList.scrollToPosition(messages.size() - 1);
+                        mAdapter.notifyDataSetChanged();
+                }
             }
         }
     }

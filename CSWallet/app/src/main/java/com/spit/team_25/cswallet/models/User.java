@@ -1,9 +1,20 @@
 package com.spit.team_25.cswallet.models;
 
-public class User {
+import java.io.Serializable;
 
-    private String name, email, balance, phone;
-    private Transactions transactions= new Transactions();
+public class User implements Serializable{
+
+    private String Uid, name, email, balance, phone;
+    private Transactions transactions;
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String Uid) {
+        this.Uid = Uid;
+    }
+
 
     public String getName() {
         return name;
@@ -39,5 +50,5 @@ public class User {
 
     public Transactions getTransactions(){return transactions;}
 
-    public void setTransactions(){this.transactions = transactions;}
+    public void setTransactions(Transactions transactions){this.transactions = transactions;}
 }
