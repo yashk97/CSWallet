@@ -114,7 +114,7 @@ public class SignUpActivity extends AppCompatActivity {
         newUser.setName(etName.getText().toString());
         newUser.setEmail(etEmail.getText().toString());
         newUser.setPhone(etPhone.getText().toString());
-        newUser.setBalance("0");
+        newUser.setBalance("5000");
 
         mDatabase.child("users").child(user.getUid()).setValue(newUser);
     }

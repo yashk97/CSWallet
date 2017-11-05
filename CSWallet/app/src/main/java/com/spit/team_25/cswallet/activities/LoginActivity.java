@@ -287,7 +287,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         final User newUser = new User();
         newUser.setName(account.getDisplayName());
         newUser.setEmail(account.getEmail());
-        newUser.setBalance("0");
         newUser.setPhone(phone);
 
         mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -301,6 +300,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
 
                 if(!flag)
+                    newUser.setBalance("5000");
                     mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
             }
 

@@ -43,6 +43,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonElement;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.adapters.BuildConfig;
 import com.spit.team_25.cswallet.adapters.MessageAdapter;
@@ -52,6 +54,8 @@ import com.spit.team_25.cswallet.models.GoogleSessionManager;
 import com.spit.team_25.cswallet.models.Message;
 import com.spit.team_25.cswallet.models.Transactions;
 import com.spit.team_25.cswallet.models.User;
+
+import org.json.JSONArray;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -427,44 +431,48 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                         startActivity(intent);
                         break;
 
-//                    case "getFAQ"://http://en.wikipedia.org/w/api.php?action=opensearch&search=query&limit=10&namespace=0&format=json
+					case "getFAQ"://http://en.wikipedia.org/w/api.php?action=opensearch&search=query&limit=10&namespace=0&format=json
+
+                        String query;
+
+                        params = result.getParameters();
+
+                        if (params != null && !params.isEmpty()) {
+                            Log.e("Pay", "Parameters: ");
+                            for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
+                                Log.e("Pay", String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
+                            }
+                        }
+                        if(params.get("bank")!=null){
+                            query = params.get("bank").getAsString();
 //
-//                        String query;
-//
-//                        params = result.getParameters();
-//
-//                        if (params != null && !params.isEmpty()) {
-//                            Log.e("Pay", "Parameters: ");
-//                            for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
-//                                Log.e("Pay", String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
-//                            }
-//                        }
-//                        if(params.get("bank")!=null){
-//                            query = params.get("bank").getAsString();
-//
-//                            AsyncHttpClient client = new AsyncHttpClient();
-//                            client.get("http://en.wikipedia.org/w/api.php?action=opensearch&search="+query+"limit=10&namespace=0&format=json", new JsonHttpResponseHandler() {
-//
-//                                @Override
-//                                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                                    super.onSuccess(statusCode, headers, response);
-//                                    String wiki_res;
-//                                    try {
-//                                        wiki_res = response.getJSONArray(2).toString();
-//                                    }catch(Exception e){
-//                                        Log.e("json error",e.toString());
-//                                    }
-//
-//
-//                                }
-//
-//                                @Override
-//                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
-//                                    super.onFailure(statusCode, headers, throwable, errorResponse);
-//                                }
-//                            });
-//                        }
-//                        break;
+                            AsyncHttpClient client = new AsyncHttpClient();
+                            client.get("http://en.wikipedia.org/w/api.php?action=opensearch&search="+query+"&limit=10&namespace=0&format=json", new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONArray response) {
+                                    super.onSuccess(statusCode, headers, response);
+                                    String wiki_res=null;
+                                    try {
+                                        response = response.getJSONArray(2);
+//                                        Log.e("json",response.get(0).toString());
+                                        wiki_res = response.get(0).toString();
+
+                                    }catch(Exception e){
+                                        Log.e("json error",e.toString());
+                                    }
+                                    Log.e("wiki",wiki_res);
+                                    messages.add(new Message("Wally",wiki_res, false, new Date()));
+                                    messageList.scrollToPosition(messages.size() - 1);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                                }
+                            });
+                        }
+                        break;
 
                     default:
                         messages.add(new Message("WALLY", speech, false, new Date()));

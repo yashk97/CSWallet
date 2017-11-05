@@ -2,7 +2,6 @@ package com.spit.team_25.cswallet.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.arlib.floatingsearchview.FloatingSearchView;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.adapters.RecyclerItemClickListener;
 import com.spit.team_25.cswallet.adapters.TransactionListViewAdapter;
@@ -21,14 +19,6 @@ import java.util.ArrayList;
 public class TransactionActivity extends AppCompatActivity {
 
     public static final long FIND_SUGGESTION_SIMULATED_DELAY = 250;
-
-    private FloatingSearchView mSearchView;
-    private AppBarLayout mAppBar;
-
-    private boolean mIsDarkSearchTheme = false;
-
-    private String mLastQuery = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +26,6 @@ public class TransactionActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.tvBalance);
         textView.setText("5000");
-
-        mSearchView = (FloatingSearchView) findViewById(R.id.floating_search_view);
-        mAppBar = (AppBarLayout) findViewById(R.id.appBarLayout);
 
         setRecyclerView();
     }
