@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 public class TransactionDetailActivity extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,5 +47,15 @@ public class TransactionDetailActivity extends AppCompatActivity {
         TID.setText(transaction.getTID());
 
         date.setText(DateFormat.getDateTimeInstance().format(Long.parseLong(transaction.getTimestamp())));
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(getIntent().getExtras().getString("Caller").equals("Payment")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            getIntent().putExtra("payment", "done");
+            startActivity(intent);
+        }
     }
 }

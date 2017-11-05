@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        Intent intent = new Intent(this, TransactionActivity.class);
+//        startActivity(intent);
 
         loadUserData(this);
         getSupportActionBar().setTitle(R.string.chat_bot);
@@ -119,19 +121,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     }
 
     public void onClick(View view) {
-        switch (view.getId()) {
-            case sendButton:
+        if(view.getId() == sendButton) {
+            if(isOnline()) {
                 String messString = this.messageText.getText().toString();
                 if (!messString.equals(BuildConfig.FLAVOR)) {
                     this.messages.add(new Message(BuildConfig.FLAVOR, messString, true, new Date()));
                     this.mAdapter.notifyDataSetChanged();
                     sendMessage(messString);
                     this.messageText.setText(BuildConfig.FLAVOR);
-                    return;
                 }
-                return;
-            default:
-                return;
+            }
+            else
+                Toast.makeText(getApplicationContext(), "You are Offline! Turn on your network!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -366,35 +367,74 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 final Result result = aiResponse.getResult();
                 final String speech = result.getFulfillment().getSpeech();
 
-                Log.e("result", result.toString());
-                switch (result.getAction()) {
-                    case "getBalance":
-                        getBalance();
-                        Log.e("result", "Speech: " + speech);
-                        break;
+                switch (result.getAction())
+                {
+                    case "getBalance":getBalance();Log.e("result", "Speech: " + speech);break;
 
                     case "Pay":
-                        String[] s = new String[2];
+
+                        String []s = new String[2];
                         Intent intent = new Intent(getApplicationContext(), MakePayment.class);
-                        final HashMap<String, JsonElement> params = result.getParameters();
+                        HashMap<String, JsonElement> params = result.getParameters();
                         Log.e("para", params.toString());
                         if (params != null && !params.isEmpty()) {
                             Log.e("Pay", "Parameters: ");
                             for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
                                 Log.e("Pay", String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
                             }
+
                         }
-                        if (params.get("number") != null)
+                        if(params.get("number") != null)
                             s[0] = params.get("number").getAsString();
                         else s[0] = "null";
 
-                        if (params.get("given-name") != null)
+                        if(params.get("given-name") != null)
                             s[1] = params.get("given-name").getAsString();
                         else s[1] = "null";
 
+                        intent.putExtra("Currentuser",user);
                         intent.putExtra("Extra", s);
                         startActivity(intent);
                         break;
+
+//                    case "getFAQ"://http://en.wikipedia.org/w/api.php?action=opensearch&search=query&limit=10&namespace=0&format=json
+//
+//                        String query;
+//
+//                        params = result.getParameters();
+//
+//                        if (params != null && !params.isEmpty()) {
+//                            Log.e("Pay", "Parameters: ");
+//                            for (final Map.Entry<String, JsonElement> entry : params.entrySet()) {
+//                                Log.e("Pay", String.format("%s: %s", entry.getKey(), entry.getValue().toString()));
+//                            }
+//                        }
+//                        if(params.get("bank")!=null){
+//                            query = params.get("bank").getAsString();
+//
+//                            AsyncHttpClient client = new AsyncHttpClient();
+//                            client.get("http://en.wikipedia.org/w/api.php?action=opensearch&search="+query+"limit=10&namespace=0&format=json", new JsonHttpResponseHandler() {
+//
+//                                @Override
+//                                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                                    super.onSuccess(statusCode, headers, response);
+//                                    String wiki_res;
+//                                    try {
+//                                        wiki_res = response.getJSONArray(2).toString();
+//                                    }catch(Exception e){
+//                                        Log.e("json error",e.toString());
+//                                    }
+//
+//
+//                                }
+//
+//                                @Override
+//                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+//                                    super.onFailure(statusCode, headers, throwable, errorResponse);
+//                                }
+//                            });
+//                        }
+//                        break;
 
                     default:
                         messages.add(new Message("WALLY", speech, false, new Date()));

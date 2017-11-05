@@ -13,6 +13,7 @@ import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.SearchSuggestionsAdapter;
@@ -207,33 +208,37 @@ public class TransactionActivity extends AppCompatActivity implements AppBarLayo
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final ArrayList<Transactions> arrayList = new ArrayList<>();
-        Transactions transaction = new Transactions();
-        transaction.setTID("21312314");
-        transaction.setStatus("paid");
-        transaction.setTimestamp(Long.toString(System.currentTimeMillis()));
-        transaction.setAmount("500");
-        transaction.setTransaction_with("Yash");
-        arrayList.add(transaction);
+//        Transactions transaction = new Transactions();
+//        transaction.setTID("21312314");
+//        transaction.setStatus("paid");
+//        transaction.setTimestamp(Long.toString(System.currentTimeMillis()));
+//        transaction.setAmount("500");
+//        transaction.setTransaction_with("Yash");
+//        arrayList.add(transaction);
+//
+//        transaction = new Transactions();
+//        transaction.setTID("464647324");
+//        transaction.setStatus("Recieved");
+//        transaction.setTimestamp(Long.toString(System.currentTimeMillis()));
+//        transaction.setAmount("5000");
+//        transaction.setTransaction_with("Rahul");
+//        arrayList.add(transaction);
 
-        transaction = new Transactions();
-        transaction.setTID("464647324");
-        transaction.setStatus("Recieved");
-        transaction.setTimestamp(Long.toString(System.currentTimeMillis()));
-        transaction.setAmount("5000");
-        transaction.setTransaction_with("Rahul");
-        arrayList.add(transaction);
+        if (arrayList == null || arrayList.size() == 0)
+            Toast.makeText(getApplicationContext(), "No Transactions Found!", Toast.LENGTH_LONG).show();
+        else {
+            TransactionListViewAdapter adapter = new TransactionListViewAdapter(arrayList);
+            recyclerView.setAdapter(adapter);
 
-        TransactionListViewAdapter adapter = new TransactionListViewAdapter(arrayList);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(TransactionActivity.this, TransactionDetailActivity.class);
-                intent.putExtra("transaction", arrayList);
-                intent.putExtra("position", position);
-                startActivity(intent);
-            }
-        }));
+            recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(TransactionActivity.this, TransactionDetailActivity.class);
+                    intent.putExtra("transaction", arrayList);
+                    intent.putExtra("position", position);
+                    startActivity(intent);
+                }
+            }));
+        }
     }
 }
