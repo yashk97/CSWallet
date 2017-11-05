@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".activities.TransactionDetailActivity">
         </activity>
+        <activity android:name=".activities.MakePayment">
+        </activity>
     </application>
 
 </manifest>
