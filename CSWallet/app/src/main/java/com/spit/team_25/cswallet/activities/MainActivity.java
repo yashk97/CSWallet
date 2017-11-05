@@ -365,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 }
                 Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
                 intent.putExtra("transactions", list);
+                startActivity(intent);
             }
 
             @Override
