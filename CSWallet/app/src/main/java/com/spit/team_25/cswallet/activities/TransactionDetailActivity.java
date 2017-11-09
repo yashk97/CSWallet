@@ -36,7 +36,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
             status.setText("Paid Successfully");
             statusLabel.setText("To:");
             transDetail.setImageResource(R.drawable.ic_paid);
-        }else{
+        }else if(transaction.getStatus().equals("received")){
             status.setText("Received Successfully");
             statusLabel.setText("From:");
             transDetail.setImageResource(R.drawable.ic_receive);
@@ -50,7 +50,7 @@ public class TransactionDetailActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(getIntent().getExtras().getString("Caller").equals("Payment")) {
+        if(getIntent().getExtras().getString("Caller") != null && getIntent().getExtras().getString("Caller").equals("Payment")) {
             Intent intent = new Intent(this, MainActivity.class);
             getIntent().putExtra("payment", "done");
             startActivity(intent);

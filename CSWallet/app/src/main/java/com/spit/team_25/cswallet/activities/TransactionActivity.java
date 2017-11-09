@@ -25,7 +25,7 @@ public class TransactionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction);
 
         TextView textView = (TextView) findViewById(R.id.tvBalance);
-        textView.setText("5000");
+        textView.setText(getIntent().getExtras().getString("userbalance"));
 
         setRecyclerView();
     }
@@ -36,7 +36,7 @@ public class TransactionActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        final ArrayList<Transactions> arrayList = ((ArrayList<Transactions>) getIntent().getSerializableExtra("transaction"));
+        final ArrayList<Transactions> arrayList = ((ArrayList<Transactions>) getIntent().getSerializableExtra("transactions"));
 //        Transactions transaction = new Transactions();
 //        transaction.setTID("21312314");
 //        transaction.setStatus("paid");

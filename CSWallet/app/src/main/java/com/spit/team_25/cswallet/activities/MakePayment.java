@@ -41,7 +41,7 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
     EditText amt;
 
     EditText phone;
-    TextView textView;
+    EditText nameReceiver;
     DatabaseReference mDatabase;
     FirebaseAuth mAuth;
     @Override
@@ -53,7 +53,7 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
         payButton.setOnClickListener(this);
         amt = (EditText) findViewById(R.id.amount);
         phone = (EditText) findViewById(R.id.receiver_contact);
-        textView = (TextView) findViewById(R.id.receiver_name);
+        nameReceiver = (EditText) findViewById(R.id.receiver_name);
         mAuth= FirebaseAuth.getInstance();
         user = (User) getIntent().getSerializableExtra("Currentuser");
 
@@ -69,19 +69,20 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
         }
         if (!params[1].equals("null")) {
             String Receiver = params[1];
-
-
-            textView.setText("Please enter " + Receiver + " 's Phone Number");
+//            nameReceiver.setText("Please enter " + Receiver + " 's Phone Number");
+            nameReceiver.setText(Receiver);
+            nameReceiver.setEnabled(false);
         }
     }
 
     @Override
     public void onComplete(HashMap<String,User> list, String number, int Amount) {
+        int flag = -1;
         for(final Map.Entry<String, User> u : list.entrySet()){
             if(number.equals(u.getValue().getPhone())){
                 //Sender  TID, Status, Transaction_with, Amount, Timestamp
                 ArrayList<Transactions> arrayList = new ArrayList<>();
-
+                flag = 0;
                 int temp = Integer.valueOf(user.getBalance()) - Amount;
                 user.setBalance(Integer.toString(temp));
                 Random r = new Random();
@@ -96,7 +97,7 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
                 temp = Integer.valueOf(u.getValue().getBalance()) + Amount;
                 u.getValue().setBalance(Integer.toString(temp));
                 mDatabase.child("users").child(u.getKey()).child("balance").setValue(u.getValue().getBalance());
-                transaction = new Transactions(TID, "Received", user.getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
+                transaction = new Transactions(TID, "received", user.getName(), Integer.toString(Amount), Long.toString(System.currentTimeMillis()));
                 mDatabase.child("users").child(u.getKey()).child("transaction").child(transaction.getTID()).setValue(transaction);
 
                 Intent intent = new Intent(MakePayment.this, TransactionDetailActivity.class);
@@ -105,10 +106,17 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
                 intent.putExtra("Caller", "Payment");
                 startActivity(intent);
                 return;
-            }
+            }else
+                flag = 1;
         }
-        TextView error = (TextView) findViewById(R.id.payment_error);
-        error.setText("invalid no.");
+        if(flag == 1) {
+            TextView error = (TextView) findViewById(R.id.payment_error);
+            error.setText("Number Does Not Exist!!");
+        }
+        if(flag == -1) {
+            TextView error = (TextView) findViewById(R.id.payment_error);
+            error.setText("User With Name " + nameReceiver.getText().toString() + " Does Not Exist!!");
+        }
     }
 
     public void validateCredentials(String name, final String number, final int Amount, @NonNull final CallbackUserCred callback){
@@ -122,7 +130,7 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
                 HashMap<String,User> list = new HashMap<String, User>();
                 for(DataSnapshot usr : dataSnapshot.getChildren()) {
                     list.put(usr.getKey(), usr.getValue(User.class));
-                    Log.e("for loop", usr.getKey()+" "+usr.getValue(User.class).getName());
+//                    Log.e("for loop", usr.getKey()+" "+usr.getValue(User.class).getName());
                 }
 
                 callback.onComplete(list, number, Amount);
@@ -133,28 +141,29 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
             public void onCancelled(DatabaseError databaseError)
             {
                 TextView error = (TextView) findViewById(R.id.payment_error);
-                error.setText("Invalid Name");
+                error.setText("User With Name " + nameReceiver.getText().toString() + "Does Not Exist!!");
             }
         });
     }
 
     @Override
     public void onClick(View v) {
-        String name = textView.getText().toString().split(" ")[2];
-        Log.e("receiver",name);
-        String number = phone.getText().toString();
-        int Amount = Integer.valueOf(amt.getText().toString());
-
-        int user_balance = Integer.valueOf(user.getBalance());
-        if(Amount > user_balance){
+        if(validatePayDetails()) {
             TextView error = (TextView) findViewById(R.id.payment_error);
-            error.setText("InSufficient Balance");
-        }
-        else
-            if(isOnline())
-                validateCredentials(name, number,Amount,this);
+            error.setText("");
+            String name = nameReceiver.getText().toString();
+            Log.e("receiver", name);
+            String number = phone.getText().toString();
+            int Amount = Integer.valueOf(amt.getText().toString());
+
+            int user_balance = Integer.valueOf(user.getBalance());
+            if (Amount > user_balance) {
+                error.setText("InSufficient Balance");
+            } else if (isOnline())
+                validateCredentials(name, number, Amount, this);
             else
                 Toast.makeText(getApplicationContext(), "You are Offline! Turn on your network!", Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean isOnline() {
@@ -163,5 +172,34 @@ public class MakePayment extends AppCompatActivity implements OnClickListener, C
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         return networkInfo != null && networkInfo.isConnected();
+    }
+
+    private boolean validatePayDetails() {
+        boolean flag = true;
+
+        if(nameReceiver.isEnabled() && nameReceiver.getText().toString().equals(""))
+        {
+            nameReceiver.setError("Required");
+            flag = false;
+        }
+
+        if(amt.getText().toString().equals(""))
+        {
+            amt.setError("Required");
+            flag = false;
+        }else if(Integer.parseInt(amt.getText().toString()) == 0){
+            amt.setError("Amount Cannot be Zero");
+            flag = false;
+        }
+
+        if(phone.getText().toString().equals("")) {
+            phone.setError("Required");
+            flag = false;
+        }else if (!(phone.getText().toString().length() == 10)) {
+            phone.setError("Invalid Number Length");
+            flag = false;
+        }
+
+        return flag;
     }
 }

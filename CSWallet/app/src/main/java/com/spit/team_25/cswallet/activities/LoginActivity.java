@@ -38,11 +38,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.spit.team_25.cswallet.R;
 import com.spit.team_25.cswallet.models.User;
 
@@ -288,34 +285,47 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         newUser.setName(account.getDisplayName());
         newUser.setEmail(account.getEmail());
         newUser.setPhone(phone);
+        newUser.setBalance("5000");
+        try {
+            mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+            makeText(LoginActivity.this, "Signed In Successfully.", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplication(), MainActivity.class);
+            intent.putExtra("Login", "Google");
+            startActivity(intent);
+            setLoginStatus(getApplicationContext(), "Google");
+            finishPrevActivities();
+        }catch (NullPointerException e){
+            Toast.makeText(getApplicationContext(), "Something Went Wrong! Try Again...", Toast.LENGTH_LONG).show();
+        }
 
-        mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean flag = false;
-                for(DataSnapshot data:dataSnapshot.getChildren())
-                    if (data.child(mAuth.getCurrentUser().getUid()).exists()){
-                        flag = true;
-                        break;
-                    }
-
-                if(!flag)
-                    newUser.setBalance("5000");
-                    mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        makeText(LoginActivity.this, "Signed In Successfully.", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplication(), MainActivity.class);
-        intent.putExtra("Login", "Google");
-        startActivity(intent);
-        setLoginStatus(getApplicationContext(), "Google");
-        finishPrevActivities();
+//        final int[] flag = {0};
+//        mDatabase.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    User post = postSnapshot.getValue(User.class);
+//                    if (post.getEmail().equals(newUser.getEmail())) {
+//                        flag[0] = 1;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//        if(flag[0] == 0)
+//            mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+//
+//        makeText(LoginActivity.this, "Signed In Successfully.", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(getApplication(), MainActivity.class);
+//        intent.putExtra("Login", "Google");
+//        startActivity(intent);
+//        setLoginStatus(getApplicationContext(), "Google");
+//        finishPrevActivities();
     }
 
     // [START auth_with_google]

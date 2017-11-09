@@ -79,7 +79,11 @@ interface CallbackUserDetail {
     void onComplete(User user);
 }
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, CallbackUserDetail {
+interface CallbackTransactionDetail {
+    void onComplete(ArrayList<Transactions> list);
+}
+
+public class MainActivity extends AppCompatActivity implements OnClickListener, CallbackUserDetail, CallbackTransactionDetail {
 
     private int in_index = 0;
     private Adapter<RecyclerView.ViewHolder> mAdapter = null;
@@ -91,9 +95,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private User user;
     private MessageReaderDbHelper messageReaderDbHelper;
     private SQLiteDatabase db;
+    private ArrayList<Transactions> list;
     private ContentValues values;
 
-    private String ACCESS_TOKEN = "552c5f6b810d4aeb89880beead79ac11";
+    private String ACCESS_TOKEN = "6de01bf543e54439ac10d56e7396cd29";
     private android.content.Context context;
     private AIDataService aiDataService;
     private AIRequest aiRequest;
@@ -111,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         loadUserData(this);
         getSupportActionBar().setTitle(R.string.chat_bot);
 
+        context = this;
         ImageButton sendButton = (ImageButton) findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
         this.messageText = (EditText) findViewById(R.id.messageText);
@@ -349,7 +355,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         db.insert(MessageEntry.TABLE_NAME, null, values);
     }
 
-    private void getHistory(){
+    private void setHistory(){
+        getHistory(this);
+    }
+
+    private void getHistory(@NonNull final CallbackTransactionDetail callback){
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         Query query =mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("transaction");
@@ -361,11 +371,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 ArrayList<Transactions> list= new ArrayList<>();
                 for(DataSnapshot usr : dataSnapshot.getChildren()) {
                     list.add(usr.getValue(Transactions.class));
-                    Log.e("for loop", usr.getValue(Transactions.class).getTID());
+//                    Log.e("for loop", usr.getValue(Transactions.class).getTID());
                 }
-                Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
-                intent.putExtra("transactions", list);
-                startActivity(intent);
+                callback.onComplete(list);
             }
 
             @Override
@@ -381,6 +389,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     protected void onDestroy() {
         messageReaderDbHelper.close();
         super.onDestroy();
+    }
+
+    @Override
+    public void onComplete(ArrayList<Transactions> list) {
+        this.list = list;
+        Intent intent = new Intent(MainActivity.this, TransactionActivity.class);
+        intent.putExtra("transactions", list);
+        intent.putExtra("userbalance", user.getBalance());
+        startActivity(intent);
     }
 
     private class TextProcessor extends AsyncTask<AIRequest, Void, AIResponse> {
@@ -476,7 +493,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                         break;
 
                     case "getHist":
-                        getHistory();
+                        setHistory();
                         break;
 
                     default:

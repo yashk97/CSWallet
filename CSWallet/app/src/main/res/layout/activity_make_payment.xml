@@ -14,12 +14,21 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp">
 
-        <TextView
-            android:id="@+id/receiver_name"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please enter Receiver's Phone Number"
-            android:textSize="18sp" />
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/receiver_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Receiver's Name"
+                android:inputType="textPersonName|textCapWords"
+                android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:textSize="18sp" />
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -32,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="0123456789"
-                android:hint="Phone Number"
+                android:hint="Receiver's Phone Number"
                 android:inputType="phone"
                 android:maxLength="10"
                 android:maxLines="1" />
@@ -49,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:inputType="number"
+                android:digits="0123456789"
                 android:hint="Enter Amount to Pay" />
         </android.support.design.widget.TextInputLayout>
 
@@ -65,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:padding="@dimen/activity_vertical_margin"
             android:visibility="gone"
             android:text=""
@@ -84,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:padding="@dimen/activity_vertical_margin"
             android:textSize="18sp"
             android:textColor="@android:color/holo_red_dark"/>
